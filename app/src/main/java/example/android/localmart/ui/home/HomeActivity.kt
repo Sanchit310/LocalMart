@@ -2,20 +2,36 @@ package example.android.localmart.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import example.android.localmart.R
+import example.android.localmart.data.model.CategoryOptionModel
 import example.android.localmart.data.model.OfferModel
+import example.android.localmart.data.model.StoreModel
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var offerAdapter: OfferAdapter
+    private lateinit var categoryOptionAdapter: CategoryOptionAdapter
+    private lateinit var storeAdapter: StoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        categoryOptionAdapter = CategoryOptionAdapter(this, getCategoryOptionList())
+        categoryOptions.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        categoryOptions.adapter = categoryOptionAdapter
+
+
+        storeAdapter = StoreAdapter(this, getStoreList())
+        allStoresRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        allStoresRecyclerview.adapter = storeAdapter
+        allStoresRecyclerview.isNestedScrollingEnabled = false
 
         offerAdapter = OfferAdapter(this, getOfferList())
         offerViewPager.adapter = offerAdapter
@@ -30,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    public fun getOfferList() : ArrayList<OfferModel>{
+    private fun getOfferList() : ArrayList<OfferModel>{
         val offerList = arrayListOf<OfferModel>()
         offerList.add(OfferModel("h","50"))
         offerList.add(OfferModel("h","40"))
@@ -38,5 +54,30 @@ class HomeActivity : AppCompatActivity() {
         offerList.add(OfferModel("h","60"))
         offerList.add(OfferModel("h","70"))
         return offerList
+    }
+
+    private fun getCategoryOptionList() : ArrayList<CategoryOptionModel>{
+        val categoryOptionList = arrayListOf<CategoryOptionModel>()
+        categoryOptionList.add(CategoryOptionModel("h", "Food"))
+        categoryOptionList.add(CategoryOptionModel("h", "Carpentry"))
+        categoryOptionList.add(CategoryOptionModel("h", "Plumbing"))
+        categoryOptionList.add(CategoryOptionModel("h", "Electronics"))
+        categoryOptionList.add(CategoryOptionModel("h", "Food"))
+        categoryOptionList.add(CategoryOptionModel("h", "Carpentry"))
+        categoryOptionList.add(CategoryOptionModel("h", "Plumbing"))
+        categoryOptionList.add(CategoryOptionModel("h", "Electronics"))
+        return categoryOptionList
+    }
+
+    private fun getStoreList() : ArrayList<StoreModel>{
+        val storeList = arrayListOf<StoreModel>()
+        storeList.add(StoreModel("Jay Confectionary", "Bakery", "3/5", 1, "h"))
+        storeList.add(StoreModel("Sonu Electrician", "Electricity", "3/5", 1, "h"))
+        storeList.add(StoreModel("Tam Grocery", "Groceries", "3/5", 1, "h"))
+        storeList.add(StoreModel("Monu Grocery", "Groceries", "3/5", 1, "h"))
+        storeList.add(StoreModel("Singh Dairy", "Dairy", "3/5", 1, "h"))
+        storeList.add(StoreModel("Chotu Plumber", "Plumbing", "3/5", 1, "h"))
+        storeList.add(StoreModel("Happy Bakers", "Bakery", "3/5", 1, "h"))
+        return storeList
     }
 }
