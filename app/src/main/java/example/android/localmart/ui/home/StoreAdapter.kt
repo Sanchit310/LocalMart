@@ -4,12 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import example.android.localmart.R
 import example.android.localmart.data.model.StoreModel
 import kotlinx.android.synthetic.main.store_item.view.*
 
-class StoreAdapter(val context: Context, val storeList : ArrayList<StoreModel>) : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
+class StoreAdapter(val storeList : ArrayList<StoreModel>, private val listener : OnItemClickListener) : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
+
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
@@ -30,12 +37,23 @@ class StoreAdapter(val context: Context, val storeList : ArrayList<StoreModel>) 
     }
 
 
-    class StoreViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    inner class StoreViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
         val storeName = itemView.storeName
         val storeImage = itemView.storeImage
         val storeCategory = itemView.storeCategory
         val storeRating = itemView.storeRating
+
+        init {
+            itemView.setOnClickListener(View.OnClickListener {
+
+                    val position = adapterPosition
+                    if(position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position)
+                    }
+
+            })
+        }
 
     }
 }

@@ -1,5 +1,5 @@
 package example.android.localmart.data.model
 
-class StoreItemModel(private val itemName : String, private val itemImageUrl : String, private val itemPrice : Int,
-                     private val itemQuantityAvl : Int, private val itemQuantitySelected : Int) {
+class StoreItemModel(val itemName : String, val itemImageUrl : String, val itemPrice : Int, val itemQty : String,
+                     val itemQuantityAvl : Int, var itemQuantitySelected : Int, var isInCart : Boolean) {
 }

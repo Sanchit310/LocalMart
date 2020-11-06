@@ -1,8 +1,9 @@
 package example.android.localmart.ui.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Layout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -11,13 +12,15 @@ import example.android.localmart.R
 import example.android.localmart.data.model.CategoryOptionModel
 import example.android.localmart.data.model.OfferModel
 import example.android.localmart.data.model.StoreModel
+import example.android.localmart.ui.storeItems.StoreItemActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), StoreAdapter.OnItemClickListener {
 
     private lateinit var offerAdapter: OfferAdapter
     private lateinit var categoryOptionAdapter: CategoryOptionAdapter
     private lateinit var storeAdapter: StoreAdapter
+    private val storeList = arrayListOf<StoreModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +31,7 @@ class HomeActivity : AppCompatActivity() {
         categoryOptions.adapter = categoryOptionAdapter
 
 
-        storeAdapter = StoreAdapter(this, getStoreList())
+        storeAdapter = StoreAdapter( getStoreList(), this)
         allStoresRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         allStoresRecyclerview.adapter = storeAdapter
         allStoresRecyclerview.isNestedScrollingEnabled = false
@@ -45,6 +48,7 @@ class HomeActivity : AppCompatActivity() {
         offerViewPager.setPageTransformer(composite)
 
     }
+
 
     private fun getOfferList() : ArrayList<OfferModel>{
         val offerList = arrayListOf<OfferModel>()
@@ -70,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getStoreList() : ArrayList<StoreModel>{
-        val storeList = arrayListOf<StoreModel>()
+
         storeList.add(StoreModel("Jay Confectionary", "Bakery", "3/5", 1, "h"))
         storeList.add(StoreModel("Sonu Electrician", "Electricity", "3/5", 1, "h"))
         storeList.add(StoreModel("Tam Grocery", "Groceries", "3/5", 1, "h"))
@@ -79,5 +83,10 @@ class HomeActivity : AppCompatActivity() {
         storeList.add(StoreModel("Chotu Plumber", "Plumbing", "3/5", 1, "h"))
         storeList.add(StoreModel("Happy Bakers", "Bakery", "3/5", 1, "h"))
         return storeList
+    }
+
+    override fun onItemClick(position: Int) {
+        val intent = Intent(this, StoreItemActivity::class.java)
+        startActivity(intent)
     }
 }
