@@ -1,4 +1,4 @@
-package example.android.localmart.ui.home
+ package example.android.localmart.ui.home
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -21,7 +21,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LOGIN"
+        android:text="SIGN UP"
         android:textColor="#A500FF"
         android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
             android:paddingRight="24dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="Login"
+            android:text="Sign Up"
             android:textSize="18sp"
             android:textColor="#fff"/>
 
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="Don't have account? Register here."
+        android:text="Already have account? Login here."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
